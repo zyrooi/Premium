@@ -1,0 +1,44 @@
+local PremiumKeys = {
+    "JRTtibghwXeykmqzh4r3oCvzf35xtb",
+}
+
+local BlacklistKeys = {
+    "abc123",
+    "badkey456",
+    "xyz789"
+}
+
+local function isPremiumKey(key)
+    for _, v in ipairs(PremiumKeys) do
+        if v == key then
+            return true
+        end
+    end
+    return false
+end
+
+local function isBlacklisted(key)
+    for _, v in ipairs(BlacklistKeys) do
+        if v == key then
+            return true
+        end
+    end
+    return false
+end
+
+if not getgenv().key or isBlacklisted(getgenv().key) then
+    game:GetService("Players").LocalPlayer:Kick("Key Is Blacklist")
+    return
+end
+
+if isPremiumKey(getgenv().key) then
+    if getgenv().version == "Arise-Crossover" then
+        loadstring(game:HttpGet("https://yourserver.com/main_mode_script.lua"))()
+    elseif getgenv().version == "Blade-Ball" then
+        loadstring(game:HttpGet("https://yourserver.com/kaitun_mode_script.lua"))()
+    else
+        game:GetService("Players").LocalPlayer:Kick("Invalid Version")
+    end
+else
+    game:GetService("Players").LocalPlayer:Kick("Invalid Key")
+end
