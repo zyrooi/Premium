@@ -30,9 +30,9 @@ local PremiumKeys = {
 }
 
 local BlacklistKeys = {
-    "abc123",
-    "badkey456",
-    "xyz789"
+    "v0pgg36h7dznqmklp3xiidecwzwh44t8q",
+    "7ndjrz91pvhlfsrub7marlrhpbqqjv83h",
+    "u5q4faefs58av7vwlun9wa4yq7a5de697"
 }
 
 local function isPremiumKey(key)
