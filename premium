@@ -64,8 +64,7 @@ if isPremiumKey(getgenv().key) then
     elseif getgenv().version == "Blade-Ball" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/Blade/refs/heads/main/Bladeball"))()
     elseif getgenv().version == "Blox-Fruit" then
-        loadstring(game:HttpsGet("https://raw.githubusercontent.com/zyrooi/Begay/refs/heads/main/Bloxfruit")
-    else
+        loadstring(game:HttpsGet("https://raw.githubusercontent.com/zyrooi/Begay/refs/heads/main/Bloxfruit")() 
         game:GetService("Players").LocalPlayer:Kick("Invalid Version")
     end
 else
