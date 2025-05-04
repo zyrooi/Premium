@@ -1,5 +1,5 @@
 local PremiumKeys = {
-    "njzhh2qib8qjpbszvo7wao346p496mitpcm",
+        "njzhh2qib8qjpbszvo7wao346p496mitpcm",
     "CAT-0IHEW-O7HFA-KHFSD-9829N-UYQDA",
     "CAT-YNRIV-DKPSE-IICNW-JSDSI-BYHJO",
     "by21q3yj2i3ewbnr8x9q2o62w95e15maa",
@@ -30,10 +30,9 @@ local PremiumKeys = {
 }
 
 local BlacklistKeys = {
-    "v0pgg36h7dznqmklp3xiidecwzwh44t8q",
-    "7ndjrz91pvhlfsrub7marlrhpbqqjv83h",
-    "u5q4faefs58av7vwlun9wa4yq7a5de697",
-    ""
+    ["abc123"] = "Hành vi gian lận bị phát hiện",
+    ["badkey456"] = "Vi phạm điều khoản sử dụng",
+    ["xyz789"] = "Key đã bị thu hồi do lạm dụng"
 }
 
 local function isPremiumKey(key)
@@ -45,21 +44,19 @@ local function isPremiumKey(key)
     return false
 end
 
-local function isBlacklisted(key)
-    for _, v in ipairs(BlacklistKeys) do
-        if v == key then
-            return true
-        end
-    end
-    return false
+local function getBlacklistReason(key)
+    return BlacklistKeys[key]
 end
 
-if not getgenv().key or isBlacklisted(getgenv().key) then
-    game:GetService("Players").LocalPlayer:Kick("Key Is Blacklist")
+local key = getgenv().key
+
+if not key or getBlacklistReason(key) then
+    local reason = getBlacklistReason(key) or "Key bị chặn"
+    game:GetService("Players").LocalPlayer:Kick(reason)
     return
 end
 
-if isPremiumKey(getgenv().key) then
+if isPremiumKey(key) then
     if getgenv().version == "Arise-Crossover" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/months/refs/heads/main/Premium%20(1).txt"))()
     elseif getgenv().version == "Blade-Ball" then
