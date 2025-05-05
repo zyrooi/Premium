@@ -1,5 +1,6 @@
 local PremiumKeys = {  
     "LYXINHGAI-E571Y-0D8CN-J6ZUB-HPPB5-BLM3W",  
+    "LYXINHGAI-YMBWC-JZR2I-FZUA4-Q3C7D-2YVDU",
 }  
   
 local BlacklistKeys = {  
