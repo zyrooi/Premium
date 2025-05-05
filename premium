@@ -1,43 +1,36 @@
-local PremiumKeys = {
-    ["LYXINHGAI-E571Y-0D8CN-J6ZUB-HPPB5-BLM3W"] = 1295816465634693155,
-}
-
-local BlacklistKeys = {
-    ["abc123"] = "Hành vi gian lận bị phát hiện",
-    ["badkey456"] = "Vi phạm điều khoản sử dụng",
-    ["xyz789"] = "Key đã bị thu hồi do lạm dụng"
-}
-
-local BlacklistIDs = {
-    [123456] = "",
-    [789101] = ""
-}
-
-local function isPremiumKey(key)
-    return PremiumKeys[key] ~= nil
-end
-
-local function getBlacklistReason(key)
-    return BlacklistKeys[key]
-end
-
-local function getBlacklistIDReason(id)
-    return BlacklistIDs[id]
-end
-
-if not getgenv().key or getBlacklistReason(getgenv().key) then
-    local reason = getBlacklistReason(getgenv().key) or "Key bị chặn"
-    game:GetService("Players").LocalPlayer:Kick(reason)
-    return
-end
-
-if isPremiumKey(getgenv().key) then
-    if PremiumKeys[getgenv().key] == getgenv().id then
-        if getBlacklistIDReason(getgenv().id) then
-            game:GetService("Players").LocalPlayer:Kick(getBlacklistIDReason(getgenv().id))
-            return
-        end
-        if getgenv().version == "Arise-Crossover" then
+local PremiumKeys = {  
+    "LYXINHGAI-E571Y-0D8CN-J6ZUB-HPPB5-BLM3W",  
+}  
+  
+local BlacklistKeys = {  
+    ["abc123"] = "Hành vi gian lận bị phát hiện",  
+    ["badkey456"] = "Vi phạm điều khoản sử dụng",  
+    ["xyz789"] = "Key đã bị thu hồi do lạm dụng"  
+}  
+  
+local function isPremiumKey(key)  
+    for _, v in ipairs(PremiumKeys) do  
+        if v == key then  
+            return true  
+        end  
+    end  
+    return false  
+end  
+  
+local function getBlacklistReason(key)  
+    return BlacklistKeys[key]  
+end  
+  
+local key = getgenv().key  
+  
+if not key or getBlacklistReason(key) then  
+    local reason = getBlacklistReason(key) or "Key bị chặn"  
+    game:GetService("Players").LocalPlayer:Kick(reason)  
+    return  
+end  
+  
+if isPremiumKey(key) then  
+    if getgenv().version == "Arise-Crossover" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/months/refs/heads/main/Premium%20(1).txt"))()
     elseif getgenv().version == "Blade-Ball" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/Blade/refs/heads/main/Bladeball"))()
@@ -46,8 +39,8 @@ if isPremiumKey(getgenv().key) then
     elseif getgenv().version == "Hunter" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/Begay/refs/heads/main/Hunter"))()
     else
-        game:GetService("Players").LocalPlayer:Kick("Invalid ID")
-    end
-else
-    game:GetService("Players").LocalPlayer:Kick("Invalid Key")
-end
+        game:GetService("Players").LocalPlayer:Kick("Invalid Version")  
+    end  
+else  
+    game:GetService("Players").LocalPlayer:Kick("Invalid Key")  
+end  
