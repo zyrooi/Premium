@@ -1,0 +1,146 @@
+local PremiumKeys = {  
+    "VkQWgBd0jn8Bs9l6gC4A3XWSOBfbxA",  
+}  
+  
+local BlacklistKeys = {  
+    ["abc123"] = "Hành vi gian lận bị phát hiện",  
+    ["badkey456"] = "Vi phạm điều khoản sử dụng",  
+    ["xyz789"] = "Key đã bị thu hồi do lạm dụng"  
+}  
+  
+local function isPremiumKey(key)  
+    for _, v in ipairs(PremiumKeys) do  
+        if v == key then  
+            return true  
+        end  
+    end  
+    return false  
+end  
+  
+local function getBlacklistReason(key)  
+    return BlacklistKeys[key]  
+end  
+  
+if not script_key or getBlacklistReason(script_key) then  
+    local reason = getBlacklistReason(script_key) or "Key bị chặn"  
+    game:GetService("Players").LocalPlayer:Kick(reason)  
+    return  
+end  
+  
+if isPremiumKey(script_key) then  
+    game.StarterGui:SetCore("SendNotification", {
+    Title = "Solitude Hub",
+    Text = "Success Loading",
+    Icon = "rbxthumb://type=Asset&id=91241799178994&w=420&h=420",
+    Duration = 5,
+    Callback = function()
+    end
+})
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Solitude Hub",
+    Text = "Reset Config Script Select Yes Or No",
+    Icon = "rbxthumb://type=Asset&id=71546332785311&w=420&h=420",
+    Duration = 5,
+    Button1 = "Yes",
+    Button2 = "No",
+    Callback = function()
+    end
+})
+repeat task.wait() until game:IsLoaded()
+
+getgenv().Image = "rbxthumb://type=Asset&id=91241799178994&w=420&h=420"
+getgenv().ToggleUI = "LeftControl"
+
+task.spawn(function()
+    if not getgenv().LoadedMobileUI then
+        getgenv().LoadedMobileUI = true
+        local OpenUI = Instance.new("ScreenGui")
+        local ImageButton = Instance.new("ImageButton")
+        local UICorner = Instance.new("UICorner")
+        OpenUI.Name = "OpenUI"
+        OpenUI.Parent = game:GetService("CoreGui")
+        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ImageButton.Parent = OpenUI
+        ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
+        ImageButton.BackgroundTransparency = 0.8
+        ImageButton.Position = UDim2.new(0, 5, 0, 5)
+        ImageButton.Size = UDim2.new(0, 55, 0, 55)
+        ImageButton.Image = getgenv().Image
+        ImageButton.Draggable = true
+        ImageButton.Transparency = 1
+        UICorner.CornerRadius = UDim.new(100)
+        UICorner.Parent = ImageButton
+        ImageButton.MouseButton1Click:Connect(function()
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().ToggleUI, false, game)
+        end)
+    end
+end)
+local DarkraiX = loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/Ui/refs/heads/main/Darkrai%20Ui%20(2).txt", true))()
+
+local Library = DarkraiX:Window("Solitude Hub","","",Enum.KeyCode.LeftControl);
+Tab1 = Library:Tab("📜 General 📜")
+Tab1:Seperator("Beru Farm")
+
+Tab1:Toggle("Auto Farm Beru", false, function(value)
+end)
+Tab1:Toggle("Auto Farm Beru Hop", false, function(value)
+end)
+Tab1:Seperator("Mob Farm")
+Tab1:Dropdown("Select Mob", {""}, function(value)
+end)
+Tab1:Toggle("Auto Farm Mob", false, function(value)
+end)
+Tab1:Toggle("Auto Farm All Mob", false, function(value)
+end)
+Tab1:Toggle("Bring Mob", true, function(value)
+end)
+Tab1:Seperator("Dungeon")
+Tab1:Toggle("Auto Farm Dungeon", false, function(value)
+end)
+Tab1:Toggle("Auto Join Dungeon", false, function(value)
+end)
+Tab1:Toggle("Auto Leave Dungeon", false, function(value)
+end)
+Tab1:Toggle("Auto Rank Test", false, function(value)
+end)
+Tab1:Toggle("Bypass Join Dungeon", false, function(value)
+end)
+Tab1:Seperator("Shop")
+
+Tab1:Toggle("Auto Sell Shadow", false, function(value)
+end)
+Tab1:Toggle("Auto Sell Weapon", false, function(value)
+end)
+Tab1:Toggle("Auto Update Weapon", false, function(value)
+end)
+Tab1:Dropdown("Select Weapon", {""}, function(value)
+end)
+Tab1:Toggle("Auto Buy Weapon", false, function(value)
+end)
+Tab1:Seperator("Castle")
+Tab1:Slider("Choose Room",1,100,25,function(value)
+end)
+Tab1:Toggle("Auto Inferno Castle", false, function(value)
+end)
+Tab1:Toggle("Join Floor 25 Castle", false, function(value)
+end)
+Tab1:Toggle("Auto Leave", false, function(value)
+end)
+Tab1:Seperator("Misc")
+Tab1:Dropdown("Choose Mount", {""}, function(value)
+end)
+Tab1:Toggle("Auto Comlect Mount", false, function(value)
+end)
+Tab1:Seperator("Arise")
+Tab1:Toggle("Auto Arise", false, function(value)
+end)
+Tab1:Toggle("Auto Destroy", false, function(value)
+end)
+Tab1:Seperator("Click")
+
+Tab1:Toggle("Auto Click", false, function(value)
+end)
+Tab1:Line()
+    else  
+    game:GetService("Players").LocalPlayer:Kick("Invalid Key")  
+end
