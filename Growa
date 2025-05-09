@@ -1,0 +1,140 @@
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Solitude Hub",
+    Text = "Success Loading",
+    Icon = "rbxthumb://type=Asset&id=91241799178994&w=420&h=420",
+    Duration = 5,
+    Callback = function()
+    end
+})
+repeat task.wait() until game:IsLoaded()
+
+getgenv().Image = "rbxthumb://type=Asset&id=91241799178994&w=420&h=420"
+getgenv().ToggleUI = "LeftControl"
+
+task.spawn(function()
+    if not getgenv().LoadedMobileUI then
+        getgenv().LoadedMobileUI = true
+        local OpenUI = Instance.new("ScreenGui")
+        local ImageButton = Instance.new("ImageButton")
+        local UICorner = Instance.new("UICorner")
+        OpenUI.Name = "OpenUI"
+        OpenUI.Parent = game:GetService("CoreGui")
+        OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ImageButton.Parent = OpenUI
+        ImageButton.BackgroundColor3 = Color3.fromRGB(105, 105, 105)
+        ImageButton.BackgroundTransparency = 0.8
+        ImageButton.Position = UDim2.new(0, 5, 0, 5)
+        ImageButton.Size = UDim2.new(0, 58, 0, 58)
+        ImageButton.Image = getgenv().Image
+        ImageButton.Draggable = false
+        ImageButton.Transparency = 1
+        UICorner.CornerRadius = UDim.new(100)
+        UICorner.Parent = ImageButton
+        ImageButton.MouseButton1Click:Connect(function()
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().ToggleUI, false, game)
+        end)
+    end
+end)
+
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local Window = Fluent:CreateWindow({
+    Title = "Solitude Hub [ Premium ]",
+    SubTitle = "By Ziugpro",
+    TabWidth = 130,
+    Size = UDim2.fromOffset(505, 355),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Tab General", Icon = "" }),
+    
+}
+local ToggleMove = Tabs.Main:AddToggle("ToggleMove", {Title = "Auto Comlect", Default = false})
+ToggleMove:OnChanged(function(Value)
+    _G.ToggleMove = Value
+end)
+
+spawn(function()
+    local TweenService = game:GetService("TweenService")
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:WaitForChild("HumanoidRootPart")
+
+    local positions = {
+        Vector3.new(100, 10, 100),
+        Vector3.new(200, 10, 200),
+    }
+
+    while task.wait(0.1) do
+        if _G.ToggleMove then
+            for _, pos in ipairs(positions) do
+                if not _G.ToggleMove then break end
+                local distance = (hrp.Position - pos).Magnitude
+                local time = distance / 300
+                local tween = TweenService:Create(hrp, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = CFrame.new(pos)})
+                tween:Play()
+                tween.Completed:Wait()
+
+                if not _G.ToggleMove then break end
+
+                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+                task.wait()
+                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+
+                task.wait(10)
+            end
+        end
+    end
+end)
+local TogglePro = Tabs.Main:AddToggle("TogglePro", {Title = "Auto Sell", Default = false })
+TogglePro:OnChanged(function(Value)
+    _G.TogglePro = Value
+end)
+local TogglePro = Tabs.Main:AddToggle("TogglePro", {Title = "Auto Buy Gear", Default = false })
+TogglePro:OnChanged(function(Value)
+    _G.TogglePro = Value
+end)
+local TogglePro = Tabs.Main:AddToggle("TogglePro", {Title = "Auto Buy", Description = "When on will buy the most valuable crop", Default = false })
+TogglePro:OnChanged(function(Value)
+    _G.TogglePro = Value
+end)
+local TogglePro = Tabs.Main:AddToggle("TogglePro", {Title = "Stealing other people's fruit", Default = false })
+TogglePro:OnChanged(function(Value)
+    _G.TogglePro = Value
+end)
+Tabs.Main:AddParagraph({
+        Title = "Dupe Seed",
+        Content = "!______!"
+    })
+local Input = Tabs.Main:AddInput("Input", {
+        Title = "Name Seed",
+        Default = "",
+        Numeric = false,
+        Finished = false,
+        Placeholder = "",
+        Callback = function(Value)
+        end
+    })
+Tabs.Main:AddButton({
+	Title = "Dupe Seed",
+	Description = "",
+	Callback = function()
+   end
+})
+local Seed = {"Dragon Seed", "Cactus Seed"}
+local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
+        Title = "Select Seed",
+        Values = Seed,
+        Multi = false,
+        Default = 1,
+    })
+local TogglePro = Tabs.Main:AddToggle("TogglePro", {Title = "Dupe Seed", Default = false })
+TogglePro:OnChanged(function(Value)
+    _G.TogglePro = Value
+end)
+
