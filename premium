@@ -40,6 +40,8 @@ if isPremiumKey(key) then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/Begay/refs/heads/main/Bloxfruit"))()
     elseif getgenv().version == "Hunter" then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/Begay/refs/heads/main/Hunter"))()
+    elseif getgenv().version == "Grow-A-Garden" then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/zyrooi/Premium/refs/heads/main/Growa"))()
     else
         game:GetService("Players").LocalPlayer:Kick("Invalid Version")  
     end  
