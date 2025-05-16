@@ -5,8 +5,8 @@ local PremiumKeys = {
 }  
   
 local BlacklistKeys = {  
-    ["abc123"] = "Hành vi gian lận bị phát hiện",  
-    ["badkey456"] = "Vi phạm điều khoản sử dụng",  
+    ["r4wv8rx2a0qwuifb8nq4jm0tabvchz"] = "[ Key Is Blacklist ] Share Key, Share Script",  
+    ["badkey456"] = "Vi phạm điều khoản sử dụng", 
     ["xyz789"] = "Key đã bị thu hồi do lạm dụng"  
 }  
   
